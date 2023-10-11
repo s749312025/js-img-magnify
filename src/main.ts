@@ -18,7 +18,7 @@ magnifyImg({
   MagnifyDomWidth: 200,
   MagnifyDomStyles: {
     // borderRadius: '50%',
-    border: '10px solid red'
+    border: '20px solid red'
   }
 })
 

@@ -102,8 +102,8 @@ export const magnifyImg = (magnifyImgParams: magnifyImgParams) => {
         if (params.overflow) {
             moveX = limiteRange(moveX, 0, imgWidth - computeWidth)
             moveY = limiteRange(moveY, 0, imgHeight - computeHeight)
-            backgroundPositionX = limiteRange(backgroundPositionX, -imgWidth * params.zoom + computeWidth - borderWidth, 0)            
-            backgroundPositionY = limiteRange(backgroundPositionY, -imgHeight * params.zoom + computeHeight - borderWidth, 0)
+            backgroundPositionX = limiteRange(backgroundPositionX, -imgWidth * params.zoom + computeWidth - borderWidth, -borderWidth)            
+            backgroundPositionY = limiteRange(backgroundPositionY, -imgHeight * params.zoom + computeHeight - borderWidth, -borderWidth)
         }
         
         if (magnifyImgParams.MagnifyDom) {
