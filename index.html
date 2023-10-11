@@ -5,112 +5,93 @@
   <meta charset="UTF-8" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
-  <!-- href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css"> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-  <title>js-img-magnify</title>
-  <script>hljs.highlightAll();</script>
+
 </head>
 
 
 <body>
-  <div class="container" style="padding-top: 100px;">
-    <h1 class="text-center">js-img-magnify</h1>
-    <p class="p-2 text-center">
-      Pure JavaScript utility enabling magnifying glass effect on an images.
-      No external dependencies required.
-    </p>
-    <!-- example1 -->
-    <h3 class="text-center p-2">example1</h3>
-    <div class="text-center">
-      <div id="example1" class="d-inline-block"></div>
+  <div id="app">
+    <div class="container" style="padding-top: 20px;">
+      <h1 class="text-center">js-img-magnify</h1>
+      <div class="text-center"><img src="https://img.shields.io/npm/v/js-img-magnify" alt=""> <img
+          src="https://img.shields.io/bundlephobia/minzip/js-img-magnify" alt=""></div>
+      <p class="p-2 text-center">
+        Pure JavaScript utility enabling magnifying glass effect on an images.
+        No external dependencies required.
+      </p>
+
+      <div class="mx-auto" style="width: 800px;">
+        <div class="d-flex ">
+          <label for="zoom" class="form-label ">zoom:</label>
+          <input v-model="form.zoom" type="range" class="form-range mx-3" min="1" max="5" id="zoom">
+          <span>{{form.zoom}}</span>
+        </div>
+        <div class="d-flex ">
+          <label for="width" class="form-label ">width:</label>
+          <input v-model="form.width" type="range" class="form-range mx-3" min="200" max="500" id="width">
+          <span>{{form.width}}</span>
+        </div>
+        <div class="d-flex ">
+          <label for="MagnifyDomWidth" class="form-label ">MagnifyDomWidth:</label>
+          <input v-model="form.MagnifyDomWidth" type="range" class="form-range mx-3" min="50" max="200" id="MagnifyDomWidth">
+          <span>{{form.MagnifyDomWidth}}</span>
+        </div>
+        <div class="d-flex ">
+          <div class="form-label me-3">MagnifyDomStyles:</div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" v-model="useMagnifyDomStyles" id="flexSwitchCheckChecked">
+            <label class="form-check-label" for="flexSwitchCheckChecked">use</label>
+          </div>
+        </div>
+
+        <div class="d-flex ">
+          <div class="form-label me-3">Custom MagnifyDom:</div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" v-model="useMagnifyDom" id="useMagnifyDom">
+            <label class="form-check-label" for="useMagnifyDom">use</label>
+          </div>
+        </div>
+
+        <div class="d-flex ">
+          <div class="form-label me-3">magnify allow overflow:</div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" v-model="form.overflow" id="overflow">
+
+          </div>
+        </div>
+
+        <h2 class="mt-5">code</h2>
+        <div class="p-2" style="background-color: #f8f9fa;">
+          <pre>
+<code>magnifyImg{
+  src: '/src/assets/waterDrop.jpg',
+  zoom: {{this.form.zoom}},
+  target: document.getElementById('example'),
+  width: {{form.width}},
+  MagnifyDomWidth: {{form.MagnifyDomWidth}},{{useMagnifyDomStyles ? `\n  MagnifyDomStyles: ${JSON.stringify(form.MagnifyDomStyles)},` : ''}}{{useMagnifyDom ? `\n  MagnifyDom: document.getElementById('show'),` : ''}}
+  overflow: {{form.overflow}}
+}</code></pre>
+        </div>
+
+        <h2 class="mt-5">example:</h2>
+        <div v-if="useMagnifyDom" class="text-center">
+          <div id="show" style="width: 500px; height: 300px; background-color: beige;" class="d-inline-block"></div>
+        </div>
+        <div class="text-center">
+          <div id="example" class="d-inline-block"></div>
+        </div>
+
+        
+      </div>
+
+      <div class="mt-5"></div>
     </div>
-    <pre><code class="language-js">
-
-      magnifyImg({
-        src: '/assets/waterDrop.jpg',
-        zoom: 3,
-        target: document.getElementById('example1'),
-        width: 500,
-        MagnifyDomWidth: 200,
-      })
-    </code></pre>
-
-
-    <!-- example2 -->
-    <h3 class="text-center p-2">example2</h3>
-    <div class="text-center">
-      <div id="example2" class="d-inline-block"></div>
-    </div>
-    <pre><code class="language-js">
-
-      magnifyImg({
-        src: '/assets/waterDrop.jpg',
-        zoom: 3,
-        target: document.getElementById('example2'),
-        width: 500,
-        MagnifyDomWidth: 200,
-        MagnifyDomStyles: {
-          borderRadius: '50%',
-          border: '4px solid red'
-        }
-      })
-    </code></pre>
-
-
-    <!-- example3 -->
-    <h3 class="text-center p-2">example3</h3>
-    <div class="text-center">
-      <div id="example3" class="d-inline-block" ></div>
-      <div id="example3Magnify" style="width: 300px; height: 300px; margin-top: 20px; background-color: bisque;"></div>
-    </div>
-    <pre><code class="language-js">
-
-      magnifyImg({
-        src: '/assets/waterDrop.jpg',
-        zoom: 3,
-        target: document.getElementById('example3'),
-        width: 500,
-        MagnifyDomWidth: 200,
-        MagnifyDomStyles: {
-          borderRadius: '50%',
-          border: '4px solid red'
-        }
-      })
-    </code></pre>
-
-
-    <!-- example4 -->
-    <h3 class="text-center p-2">example4</h3>
-    <div class="text-center">
-      <div id="example4" class="d-inline-block" ></div>
-      <div id="example4Magnify" style="width: 300px; height: 300px; margin-top: 20px; background-color: bisque;"></div>
-    </div>
-    <pre><code class="language-js">
-
-      magnifyImg({
-        src: '/assets/waterDrop.jpg',
-        zoom: 3,
-        target: document.getElementById('example4'),
-        width: 500,
-        MagnifyDomWidth: 200,
-        MagnifyDomStyles: {
-          borderRadius: '50%',
-          border: '4px solid red'
-        }
-      })
-    </code></pre>
 
   </div>
-
-
-  </div>
-
-  <script type="module" src="/src/main.ts"></script>
+  <script type="module" src="/src/main.js"></script>
 </body>
 
 

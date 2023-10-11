@@ -1,11 +1,11 @@
 {
   "name": "js-img-magnify",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.6",
 
   "main": "lib/js-img-magnify.umd.js",
   "module": "lib/js-img-magnify.mjs",
-  "typings": "lib/lib/index.d.ts",
+  "typings": "lib/index.d.ts",
   "files": [ "lib" ],
   "scripts": {
     "dev": "vite",

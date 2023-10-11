@@ -1,5 +1,5 @@
 
-interface magnifyImgParams {
+export interface magnifyImgParams {
     src: string;
     zoom?: number;
     target: HTMLElement;
@@ -10,7 +10,7 @@ interface magnifyImgParams {
     overflow?: Boolean
 }
 
-type partialCSSStyleDeclaration =  Partial<CSSStyleDeclaration>
+export type partialCSSStyleDeclaration =  Partial<CSSStyleDeclaration>
 
 interface IHTMLElement extends HTMLElement {
   move?: Function 
@@ -66,6 +66,9 @@ export const magnifyImg = (magnifyImgParams: magnifyImgParams) => {
     const scaleContainer: IHTMLElement = magnifyImgParams.MagnifyDom || document.createElement("div")
     // scaleContainer set style
     if (magnifyImgParams.MagnifyDom) {
+        params.MagnifyDomStyles = {}
+    }
+    if (magnifyImgParams.MagnifyDom) {
         setDomStyle(scaleContainer, {
             backgroundRepeat: 'no-repeat',
             ...params.MagnifyDomStyles
@@ -85,7 +88,9 @@ export const magnifyImg = (magnifyImgParams: magnifyImgParams) => {
         })
     }
     
-    container.append(scaleContainer)
+    if (!magnifyImgParams.MagnifyDom) {
+        container.append(scaleContainer)
+    }
     scaleContainer.move = () => {
         // computeScaleContainerDom
         let computeWidth = scaleContainer.getBoundingClientRect().width
@@ -96,10 +101,11 @@ export const magnifyImg = (magnifyImgParams: magnifyImgParams) => {
         let moveX: number|string = scaleX - computeWidth / 2
         let moveY: number|string = scaleY - computeHeight / 2
         let backgroundPositionX: number|string = -(scaleX * params.zoom - computeWidth / 2 + borderWidth)
-        let backgroundPositionY: number|string = -(scaleY * params.zoom - computeWidth / 2 + borderWidth)
+        let backgroundPositionY: number|string = -(scaleY * params.zoom - computeHeight / 2 + borderWidth)
 
         // if overflow is true, move & backgroundPosition limite range
-        if (params.overflow) {
+        // notice: backgroundImage start [borderWidth, borderWidth]
+        if (!params.overflow) {
             moveX = limiteRange(moveX, 0, imgWidth - computeWidth)
             moveY = limiteRange(moveY, 0, imgHeight - computeHeight)
             backgroundPositionX = limiteRange(backgroundPositionX, -imgWidth * params.zoom + computeWidth - borderWidth, -borderWidth)            
