@@ -1,0 +1,21 @@
+{
+  "name": "js-img-magnify",
+  "private": false,
+  "version": "0.0.1",
+
+  "main": "lib/js-img-magnify.umd.js",
+  "module": "lib/js-img-magnify.mjs",
+  "typings": "lib/lib/index.d.ts",
+  "files": [ "lib" ],
+  "scripts": {
+    "dev": "vite",
+    "lib": "tsc && vite build --mode lib",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vite-plugin-dts": "^3.6.0"
+  }
+}
