@@ -2,11 +2,24 @@
   "name": "js-img-magnify",
   "private": false,
   "version": "0.0.6",
-
   "main": "lib/js-img-magnify.umd.js",
   "module": "lib/js-img-magnify.mjs",
   "typings": "lib/index.d.ts",
   "files": [ "lib" ],
+  "description": "Pure JavaScript utility enabling magnifying glass effect on an images",
+  "author": "shengbuchao",
+  "homepage": "https://github.com/s749312025/js-img-magnify",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/s749312025/js-img-magnify"
+  },
+  "keywords": [
+    "async",
+    "sync",
+    "generators",
+    "async-await",
+    "callbacks"
+  ],
   "scripts": {
     "dev": "vite",
     "lib": "tsc && vite build --mode lib",

@@ -11,6 +11,10 @@ So you can use it in any web application, such as `Vue`, `React`,`Angular`, `Sve
 
 support `Typescript`
 
+## Demo
+
+[view Demo](https://s749312025.github.io/js-img-magnify/)
+
 ## How to use
 
 - npm or yarn
