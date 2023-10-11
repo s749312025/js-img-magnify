@@ -4,17 +4,25 @@ import dts from 'vite-plugin-dts'
 // console.log(process.env);
 export default defineConfig(({command, mode}) => {
   const env = loadEnv(mode, process.cwd(), '')
+  const isLibMode = env.BUILDTYPE === 'lib'
   console.log(env.BUILDTYPE);
-  let buildOption = env.BUILDTYPE === 'lib' ? {
+  let buildOption = isLibMode ? {
     outDir: 'lib',
     lib: {
       entry: resolve(__dirname, 'src/lib/index.ts'),
       name: 'index',
     }
-  } : {}
-  console.log(buildOption);
-  return {
+  } : {
+  }
+  const config = {
     plugins: [dts()],
     build: buildOption
   }
+
+  if (!isLibMode) {
+    config.base = './'
+  }
+
+
+  return config
 })
