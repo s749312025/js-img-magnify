@@ -1,7 +1,7 @@
 {
   "name": "js-img-magnify",
   "private": false,
-  "version": "0.0.6",
+  "version": "0.0.8",
   "main": "lib/js-img-magnify.umd.js",
   "module": "lib/js-img-magnify.mjs",
   "typings": "lib/index.d.ts",
@@ -14,11 +14,11 @@
     "url": "https://github.com/s749312025/js-img-magnify"
   },
   "keywords": [
-    "async",
-    "sync",
-    "generators",
-    "async-await",
-    "callbacks"
+    "magnify",
+    "img",
+    "utility",
+    "Typescript",
+    "No-external"
   ],
   "scripts": {
     "dev": "vite",
